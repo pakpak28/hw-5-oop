@@ -132,7 +132,13 @@ Order.prototype.delete = function (elem) {
 Order.prototype.show = function () {
   if (this.items.length) {
     this.items.forEach(function (elem) {
-      console.log("Your ordered : " + elem.name + elem.stuffing);
+      if (elem.stuffing) {
+        console.log(
+          "Your ordered : " + elem.name + " burger with " + elem.stuffing
+        );
+      } else {
+        console.log("u ordered " + elem.name);
+      }
     });
   } else {
     console.log("ur order list is empty");

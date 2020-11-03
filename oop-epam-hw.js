@@ -1,4 +1,12 @@
-// main classes
+//Hello and welcome!
+// Following sections contains:
+// 1) Classes for Food
+// 2) Proto functions for order
+// 3) Variables for comfortable controll
+// 4) Basic commands
+// As my programm got no graphical interface please follow this link for demo  : https://codepen.io/pakpak28/pen/WNxyGwe
+
+// Main classes for food.
 
 function Food(name) {
   this.name = name;
@@ -84,7 +92,7 @@ Salad.CAESAR = { price: 100, callories: 20 };
 Drink.COLA = { price: 50, callories: 40 };
 Drink.COFFEE = { price: 80, callories: 20 };
 
-/* order class n proto functions*/
+/* Order class and proto functions*/
 function Order() {
   this.items = [];
   this.totalPrice = 0;
@@ -107,7 +115,7 @@ Order.prototype.calcTotalCallories = function () {
 
 Order.prototype.add = function (elem) {
   if (Object.isFrozen(this.items)) {
-    console.log("ur order has been paid");
+    console.log("Your order has been paid");
   } else {
     this.items.push(elem);
     this.totalCallories += elem.callories;
@@ -118,13 +126,13 @@ Order.prototype.add = function (elem) {
 
 Order.prototype.delete = function (elem) {
   if (Object.isFrozen(this.items)) {
-    console.log("ur order has been paid");
+    console.log("Your order has been paid, so you cant edit.");
   } else {
     for (var i = 0; i < this.items.length; i++) {
       this.items.splice(i, 1);
       this.totalCallories -= elem.callories;
       this.totalPrice -= elem.price;
-      console.log(elem.name + " removed from order");
+      console.log(elem.name + " was removed from your order");
     }
   }
 };
@@ -137,11 +145,11 @@ Order.prototype.show = function () {
           "Your ordered : " + elem.name + " burger with " + elem.stuffing
         );
       } else {
-        console.log("u ordered " + elem.name);
+        console.log("You have ordered " + elem.name);
       }
     });
   } else {
-    console.log("ur order list is empty");
+    console.log("Your order list is empty.");
   }
 };
 
@@ -149,3 +157,28 @@ Order.prototype.pay = function () {
   Object.freeze(this.items);
   console.log("Thank you for purchase.Order was paid.");
 };
+
+/* menu variables*/
+var order = new Order();
+
+var hamburger1 = new Hamburger("small", "cheese");
+var hamburger2 = new Hamburger("small", "salad");
+var hamburger3 = new Hamburger("small", "potato");
+var hamburger4 = new Hamburger("large", "cheese");
+var hamburger5 = new Hamburger("large", "salad");
+var hamburger6 = new Hamburger("large", "potato");
+
+var drink1 = new Drink("cola");
+var drink2 = new Drink("coffee");
+var salad1 = new Salad("caesar");
+var salad2 = new Salad("olivier");
+
+// BASIC FEATURES and COMMANDS:
+order.show();
+order.add(salad1);
+order.add(drink1);
+order.add(hamburger1);
+order.calcTotalPrice();
+order.calcTotalCallories();
+order.pay();
+order.delete(salad1);
